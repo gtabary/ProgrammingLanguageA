@@ -80,8 +80,8 @@ fun remove_card(cs, c, e) =
 
 fun all_same_color([]) = true
   | all_same_color((_,_)::[]) = true
-  | all_same_color((_,c1)::(s, c2)::cs) =
-    c1=c2 andalso all_same_color((s,c2)::cs);
+  | all_same_color((c1,_)::(c2,r)::cs) =
+    c1=c2 andalso all_same_color((c2,r)::cs);
 		        
 fun sum_cards(cs) =
     let
