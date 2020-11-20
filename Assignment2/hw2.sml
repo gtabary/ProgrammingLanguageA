@@ -46,7 +46,7 @@ fun get_substitutions2(lst, s) =
 	| get_substitutions2'(x::l, s, a) =
           case all_except_option(s, x) of
             NONE => get_substitutions2'(l, s, a)
-            | SOME il => get_substitutions2'(l, s, il@a)
+            | SOME il => get_substitutions2'(l, s, a@il)
     in
       get_substitutions2'(lst, s, [])
     end;
@@ -56,8 +56,8 @@ fun similar_names(
     { first=f, last=l, middle=m }) =
     let
       fun similar_names2'([], a) = a
-        | similar_names2'(x::lst, a)  =
-          similar_names2'(lst, {first=x, last=l, middle=m}::a)
+        | similar_names2'(x::lst, a) =
+          similar_names2'(lst, a@[{first=x, last=l, middle=m}])
     in
       similar_names2'(get_substitutions2(names, f), [{ first=f, last=l, middle=m}])
     end;
